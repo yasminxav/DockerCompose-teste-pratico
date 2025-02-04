@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: meu_postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=18291516
+      - POSTGRES_DB=postgres
+    ports:
+      - 5433:5433
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  
+  apache:
+    image: httpd:2.4  # Usa a imagem oficial do Apache
+    container_name: meu_apache
+    restart: always
+    ports:
+      - "8080:80"  # Mapeia a porta 80 do container para a 8080 no host
+    volumes:
+      - ./public-html:/usr/local/apache2/htdocs
+volumes:
+  pg_data:
